@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E37DFC916964013001FF824 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFC816964013001FF824 /* main.cpp */; };
+		8E37DFD516964147001FF824 /* sfml-audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E37DFD116964147001FF824 /* sfml-audio.framework */; };
+		8E37DFD616964147001FF824 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E37DFD216964147001FF824 /* sfml-graphics.framework */; };
+		8E37DFD716964147001FF824 /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E37DFD316964147001FF824 /* sfml-system.framework */; };
+		8E37DFD816964147001FF824 /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E37DFD416964147001FF824 /* sfml-window.framework */; };
+		8E37DFE016964DBA001FF824 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFDE16964DBA001FF824 /* Game.cpp */; };
+		8E37DFE316964E9F001FF824 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFE116964E9F001FF824 /* State.cpp */; };
+		8E37DFE7169656FC001FF824 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFE5169656FC001FF824 /* View.cpp */; };
+		8EEEF34B169A218C00DE1FB2 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEEF349169A218C00DE1FB2 /* Map.cpp */; };
+		8EEEF357169A41D000DE1FB2 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEEF355169A41D000DE1FB2 /* base64.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8E37DFC216964013001FF824 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8E37DFC416964013001FF824 /* MakeItBlack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MakeItBlack; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E37DFC816964013001FF824 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8E37DFD116964147001FF824 /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "../../../Library/Frameworks/sfml-audio.framework"; sourceTree = "<group>"; };
+		8E37DFD216964147001FF824 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../Library/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
+		8E37DFD316964147001FF824 /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../Library/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
+		8E37DFD416964147001FF824 /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../Library/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
+		8E37DFDE16964DBA001FF824 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		8E37DFDF16964DBA001FF824 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		8E37DFE116964E9F001FF824 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		8E37DFE216964E9F001FF824 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8E37DFE5169656FC001FF824 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
+		8E37DFE6169656FC001FF824 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		8EEEF349169A218C00DE1FB2 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8EEEF34A169A218C00DE1FB2 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8EEEF34E169A2E3F00DE1FB2 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		8EEEF34F169A2E3F00DE1FB2 /* manual.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = manual.html; sourceTree = "<group>"; };
+		8EEEF350169A2E3F00DE1FB2 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		8EEEF351169A2E3F00DE1FB2 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
+		8EEEF352169A2E3F00DE1FB2 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
+		8EEEF353169A2E3F00DE1FB2 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
+		8EEEF355169A41D000DE1FB2 /* base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base64.cpp; sourceTree = "<group>"; };
+		8EEEF356169A41D000DE1FB2 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E37DFC116964013001FF824 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E37DFD516964147001FF824 /* sfml-audio.framework in Frameworks */,
+				8E37DFD616964147001FF824 /* sfml-graphics.framework in Frameworks */,
+				8E37DFD716964147001FF824 /* sfml-system.framework in Frameworks */,
+				8E37DFD816964147001FF824 /* sfml-window.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E37DFB916964013001FF824 = {
+			isa = PBXGroup;
+			children = (
+				8EEEF354169A41C400DE1FB2 /* base64 */,
+				8EEEF34D169A2E3F00DE1FB2 /* rapidxml */,
+				8E37DFDD1696431A001FF824 /* SFML */,
+				8E37DFC716964013001FF824 /* MakeItBlack */,
+				8E37DFC516964013001FF824 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E37DFC516964013001FF824 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E37DFC416964013001FF824 /* MakeItBlack */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E37DFC716964013001FF824 /* MakeItBlack */ = {
+			isa = PBXGroup;
+			children = (
+				8E37DFE4169655E9001FF824 /* Headers */,
+				8E37DFE116964E9F001FF824 /* State.cpp */,
+				8E37DFE5169656FC001FF824 /* View.cpp */,
+				8E37DFDE16964DBA001FF824 /* Game.cpp */,
+				8EEEF349169A218C00DE1FB2 /* Map.cpp */,
+				8E37DFC816964013001FF824 /* main.cpp */,
+			);
+			path = MakeItBlack;
+			sourceTree = "<group>";
+		};
+		8E37DFDD1696431A001FF824 /* SFML */ = {
+			isa = PBXGroup;
+			children = (
+				8E37DFD116964147001FF824 /* sfml-audio.framework */,
+				8E37DFD216964147001FF824 /* sfml-graphics.framework */,
+				8E37DFD316964147001FF824 /* sfml-system.framework */,
+				8E37DFD416964147001FF824 /* sfml-window.framework */,
+			);
+			name = SFML;
+			sourceTree = "<group>";
+		};
+		8E37DFE4169655E9001FF824 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				8E37DFE216964E9F001FF824 /* State.h */,
+				8E37DFE6169656FC001FF824 /* View.h */,
+				8E37DFDF16964DBA001FF824 /* Game.h */,
+				8EEEF34A169A218C00DE1FB2 /* Map.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		8EEEF34D169A2E3F00DE1FB2 /* rapidxml */ = {
+			isa = PBXGroup;
+			children = (
+				8EEEF34E169A2E3F00DE1FB2 /* license.txt */,
+				8EEEF34F169A2E3F00DE1FB2 /* manual.html */,
+				8EEEF350169A2E3F00DE1FB2 /* rapidxml.hpp */,
+				8EEEF351169A2E3F00DE1FB2 /* rapidxml_iterators.hpp */,
+				8EEEF352169A2E3F00DE1FB2 /* rapidxml_print.hpp */,
+				8EEEF353169A2E3F00DE1FB2 /* rapidxml_utils.hpp */,
+			);
+			name = rapidxml;
+			path = ../rapidxml;
+			sourceTree = "<group>";
+		};
+		8EEEF354169A41C400DE1FB2 /* base64 */ = {
+			isa = PBXGroup;
+			children = (
+				8EEEF355169A41D000DE1FB2 /* base64.cpp */,
+				8EEEF356169A41D000DE1FB2 /* base64.h */,
+			);
+			name = base64;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E37DFC316964013001FF824 /* MakeItBlack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E37DFCE16964013001FF824 /* Build configuration list for PBXNativeTarget "MakeItBlack" */;
+			buildPhases = (
+				8E37DFC016964013001FF824 /* Sources */,
+				8E37DFC116964013001FF824 /* Frameworks */,
+				8E37DFC216964013001FF824 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MakeItBlack;
+			productName = MakeItBlack;
+			productReference = 8E37DFC416964013001FF824 /* MakeItBlack */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E37DFBB16964013001FF824 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = logicdream;
+			};
+			buildConfigurationList = 8E37DFBE16964013001FF824 /* Build configuration list for PBXProject "MakeItBlack" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8E37DFB916964013001FF824;
+			productRefGroup = 8E37DFC516964013001FF824 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E37DFC316964013001FF824 /* MakeItBlack */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E37DFC016964013001FF824 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E37DFC916964013001FF824 /* main.cpp in Sources */,
+				8E37DFE016964DBA001FF824 /* Game.cpp in Sources */,
+				8E37DFE316964E9F001FF824 /* State.cpp in Sources */,
+				8E37DFE7169656FC001FF824 /* View.cpp in Sources */,
+				8EEEF34B169A218C00DE1FB2 /* Map.cpp in Sources */,
+				8EEEF357169A41D000DE1FB2 /* base64.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8E37DFCC16964013001FF824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8E37DFCD16964013001FF824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8E37DFCF16964013001FF824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../rapidxml\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8E37DFD016964013001FF824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../rapidxml\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E37DFBE16964013001FF824 /* Build configuration list for PBXProject "MakeItBlack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E37DFCC16964013001FF824 /* Debug */,
+				8E37DFCD16964013001FF824 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E37DFCE16964013001FF824 /* Build configuration list for PBXNativeTarget "MakeItBlack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E37DFCF16964013001FF824 /* Debug */,
+				8E37DFD016964013001FF824 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E37DFBB16964013001FF824 /* Project object */;
+}

@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include "Map.h"
 
@@ -40,9 +41,39 @@ MapLayer::MapLayer(rapidxml::xml_node<char>* node) {
 	auto dataVal = node->first_node("data")->value();
 	while (isspace(*dataVal))
 		dataVal++;
-	string tileData = base64_decode(dataVal);
-	std::cout << "tileData size = " << tileData.size() << '\n';
+	string tileBytes = base64_decode(dataVal);
+	
+	int tileCount = tileBytes.size() / 4,
+		offset = 0;
+	tileData.reserve(tileCount);
+	while (tileCount--) {
+		Tile tilex = *(reinterpret_cast<Tile*>(&tileBytes[offset]));
+		tileData.push_back(tilex & 0x1fffffff); // strip away mirroring bits
+		offset += 4;
+	}
 }
+
+Tile MapLayer::tileAt(int row, int col) {
+	if (row < 0 || col < 0 || row >= height || col >= width)
+		return 999;
+	return tileData[(row * width) + col];
+}
+
+void MapLayer::setTileAt(int row, int col, Tile tile) {
+	if (row < 0 || col < 0 || row >= height || col >= width)
+		return;
+	tileData[(row * width) + col] = tile;
+}
+
+TileRange MapLayer::rangeOnRow(int row, int fromCol, int tileCount) {
+	auto offset = tileData.begin() + (row * width) + fromCol;
+	return { offset, offset + tileCount };
+}
+
+int MapLayer::countExposedTiles() {
+	return 50;
+}
+
 
 
 Map::Map(const std::string & fileName) {
@@ -67,4 +98,8 @@ Map::Map(const std::string & fileName) {
 		if (name == "layer")
 			layers.emplace_back(new MapLayer(layerNode));
 	}
+}
+
+const MapLayerRef & Map::layer(int index) {
+	return layers[index];
 }

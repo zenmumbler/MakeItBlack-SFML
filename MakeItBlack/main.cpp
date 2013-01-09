@@ -79,7 +79,7 @@ void MakeItBlack::mainLoop() {
 				if (timeSinceStep > 20)	// limit slowdown
 					timeSinceStep = 20;
 
-				game->step(static_cast<double>(timeSinceStep) / 1000.0);	// time in seconds
+				game->step(static_cast<float>(timeSinceStep) / 1000.0f);	// time in seconds
 				lastStep = state->timeNow;
 			}
 		}
@@ -101,7 +101,7 @@ void MakeItBlack::run() {
 	
 	window.reset(new sf::RenderWindow(sf::VideoMode(viewW, viewH, 32), "Make It Black", sf::Style::Close));
 	
-	game.reset(new Game(state));
+	game.reset(new Game(state, window->GetInput()));
 	view.reset(new View(state, window));
 
 	game->load([this] {

@@ -7,6 +7,7 @@
 #include <memory>
 #include <chrono>
 
+class Map;
 
 class Globals {
 	Globals() = delete;
@@ -39,6 +40,14 @@ public:
 	TimePoint timeNow, fadeTime;
 	
 	int bile, disgust;
+	
+	std::unique_ptr<Map> map;
+	int exposedTiles, tarnishedTiles;
+	float completion;
+	TimePoint completionTime;
+	
+	int frameCtr = 0;
+	float cameraX;
 	
 	State() = default;
 };

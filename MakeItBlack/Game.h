@@ -6,22 +6,25 @@
 
 #include <functional>
 #include <memory>
+
+#include <SFML/Window.hpp>
+
 #include "State.h"
 #include "Map.h"
 
 
 class Game {
 	StateRef state;
-	std::unique_ptr<Map> map;
+	const sf::Input & input;
 	
 	void loadLevel(int index, const std::function<void()> & done);
 	
 public:
-	Game(StateRef theState);
+	Game(StateRef theState, const sf::Input & theInput);
 	
 	void load(const std::function<void()> & done);
 	
-	void step(double dt);
+	void step(float dt);
 	
 	void startLevel(int index, const std::function<void()> & done);
 };

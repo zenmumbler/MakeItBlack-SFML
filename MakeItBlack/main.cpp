@@ -8,6 +8,7 @@
 #include "State.h"
 #include "Game.h"
 #include "View.h"
+#include "Entity.h"
 
 
 // ----------------------------------------------------------------------------

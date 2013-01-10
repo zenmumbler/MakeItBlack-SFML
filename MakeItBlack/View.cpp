@@ -3,6 +3,8 @@
 
 #include "Map.h"
 #include "View.h"
+#include "Entity.h"
+#include <cmath>
 
 
 View::View(StateRef theState, std::shared_ptr<sf::RenderWindow> theWindow)
@@ -56,7 +58,15 @@ void View::drawMeters() {
 }
 
 void View::drawSprites() {
-	
+	for (auto ent : state->entities) {
+		float pixWidth = ent->width * Globals::TILE_DIM * VIEW_SCALE;
+		float pixHeight  = ent->height * Globals::TILE_DIM * VIEW_SCALE;
+		
+		float left = std::round(ent->locX - state->cameraX) * VIEW_SCALE;
+		float top = std::round(ent->locY + 1.f) * VIEW_SCALE - pixHeight;
+		sf::Shape r = sf::Shape::Rectangle(left, top, left + pixWidth, top + pixHeight, sf::Color::Red);
+		window->Draw(r);
+	}
 }
 
 static sf::Color colerp(const sf::Color & from, const sf::Color & to, float ratio) {
@@ -92,7 +102,7 @@ void View::drawBG() {
 	for (int y=0; y < Globals::STAGE_H/8; y++) {
 		auto tiles = state->map->layer(0)->rangeOnRow(y, state->cameraX / Globals::TILE_DIM, (Globals::STAGE_W / 8) + 1);
 		tY = (float)y * Globals::TILE_DIM * VIEW_SCALE;
-		tX = -((int)state->cameraX & (Globals::TILE_DIM - 1));
+		tX = -((int)state->cameraX & (Globals::TILE_DIM - 1)) * VIEW_SCALE;
 
 		for (auto it = tiles.first; it < tiles.second; ++it) {
 			Tile tilex = *it;

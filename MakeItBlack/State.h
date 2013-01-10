@@ -6,17 +6,22 @@
 
 #include <memory>
 #include <chrono>
+#include <vector>
+
 
 class Map;
+class Entity;
+class EntityDelegate;
+using EntityRef = std::shared_ptr<Entity>;
 
-class Globals {
-	Globals() = delete;
 
-public:
+namespace Globals {
 	constexpr static int STAGE_W = 320;
 	constexpr static int STAGE_H = 192;
 	constexpr static int TILE_DIM = 8;
-};
+	
+	constexpr static int GRAVITY_SEC = 300;
+}
 
 
 using TimePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
@@ -46,6 +51,9 @@ public:
 	float completion;
 	TimePoint completionTime;
 	
+	std::vector<EntityRef> entities;
+	Entity * player = nullptr;
+
 	int frameCtr = 0;
 	float cameraX;
 	

@@ -44,6 +44,8 @@ public:
 	Map(const std::string & fileName);
 	
 	const MapLayerRef & layer(int index);
+	int getWidth() { return width; }
+	int getHeight() { return height; }
 };
 
 #endif /* defined(__MakeItBlack__Map__) */

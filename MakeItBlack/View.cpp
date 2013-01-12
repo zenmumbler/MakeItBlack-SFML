@@ -8,6 +8,41 @@
 
 using namespace Globals;
 
+
+void Cloud::makeSeg() {
+	Seg s;
+	s.cx = baseX - 45.f + (90.f * state.random());
+	s.cy = baseY - 45.f + (90.f * state.random());
+	s.rad = 15 + (15.f * state.random());
+	s.alpha = 38 + (20 * state.random());
+	segs.push_back(s);
+}
+
+Cloud::Cloud(State & sta, float locX)
+	: state(sta)
+	, baseX(locX)
+{
+	baseY = 48.f + (state.random() * 48.f);
+	period = 3000 + std::round(state.random() * 4000);
+	
+	int segCount = 9 + (state.random() * 7);
+	for (int i=0; i<segCount; i++)
+		makeSeg();
+}
+
+void Cloud::draw(sf::RenderWindow & window) {
+	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(state.timeNow.time_since_epoch()).count();
+	float tau = 2 * 3.1415926535;
+	float cycle = tau * ((float)(ms % period) / period);
+	float rScale = 1.f + (0.1 * std::sin(cycle));
+	for (auto & seg : segs) {
+		sf::Shape shp = sf::Shape::Circle(seg.cx, seg.cy, seg.rad * rScale, sf::Color(255,255,255,seg.alpha));
+		window.Draw(shp);
+	}
+}
+
+
+
 View::View(StateRef theState, std::shared_ptr<sf::RenderWindow> theWindow)
 	: state(theState)
 	, window(theWindow)
@@ -26,8 +61,27 @@ void View::load(const std::function<void ()> & done) {
 }
 
 
+void View::buildClouds() {
+	float x = -10.f,
+		endX = (state->map->getWidth() * TILE_DIM * VIEW_SCALE) + 10.f;
+
+	clouds.clear();
+	
+	while (x < endX) {
+		clouds.emplace_back(*state, x);
+		x += 45.f + (120.f * state->random());
+	}
+}
+
+
 sf::Vector2f View::scaleCoord(float x, float y) {
 	return { x * VIEW_SCALE, y * VIEW_SCALE };
+}
+
+
+void View::drawClouds() {
+	for (auto & cloud : clouds)
+		cloud.draw(*window);
 }
 
 
@@ -147,18 +201,24 @@ void View::drawBG() {
 }
 
 
+void View::drawDimmer(float alpha) {
+	int intAlpha = alpha * 255.f;
+	auto shp = sf::Shape::Rectangle(0.f, 0.f, STAGE_W * VIEW_SCALE, STAGE_H * VIEW_SCALE, sf::Color(0, 0, 0, intAlpha));
+	window->Draw(shp);
+}
+
+
 void View::render() {
 	state->frameCtr++;
 	drawBG();
 	drawSprites();
+	drawClouds();
 	drawMeters();
 
-	sf::String text { std::to_string(window->GetFrameTime()), font, 48.0f };
-	text.SetColor(sf::Color::White);
-	text.SetPosition(scaleCoord(STAGE_W / 2.0f - 50.f, 30.0f));
-	window->Draw(text);
-
-	window->Display();
+//	sf::String text { std::to_string(window->GetFrameTime()), font, 48.0f };
+//	text.SetColor(sf::Color::White);
+//	text.SetPosition(scaleCoord(STAGE_W / 2.0f - 50.f, 30.0f));
+//	window->Draw(text);
 }
 
 
@@ -166,5 +226,5 @@ void View::levelChanged() {
 	state->frameCtr = 0;
 	state->cameraX = 0.0f;
 	
-	// build clouds
+	buildClouds();
 }

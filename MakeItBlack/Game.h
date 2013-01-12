@@ -20,6 +20,7 @@ class Game {
 	
 	void loadLevel(int index, const std::function<void()> & done);
 	void moveCamera();
+	void checkMessages();
 	
 public:
 	Game(StateRef theState, const sf::Input & theInput);

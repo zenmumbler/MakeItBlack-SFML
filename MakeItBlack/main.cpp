@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <thread>
+
 #include <SFML/System.hpp>
 
 #include "State.h"
@@ -31,7 +32,7 @@ class MakeItBlack {
 	
 	bool running = false;
 	
-	TimePoint lastStep, lastRender;
+	TimePoint lastStep, lastRender, fadeStart;
 	
 public:
 	MakeItBlack() = default;
@@ -71,8 +72,19 @@ void MakeItBlack::mainLoop() {
 			game->startLevel(state->levelIndex, [this, &timeSinceStep, &timeSinceRender]{
 				state->timeNow = lastStep = lastRender = std::chrono::high_resolution_clock::now();
 				timeSinceStep = timeSinceRender = 0;
-				state->phase = GamePhase::PLAY;
+				state->phase = GamePhase::START;
+				view->levelChanged();
 			});
+		}
+
+		if (state->phase == GamePhase::START) {
+			fadeStart = high_resolution_clock::now();
+			state->phase = GamePhase::FADEIN;
+		}
+		
+		if (state->phase == GamePhase::END) {
+			fadeStart = high_resolution_clock::now();
+			state->phase = GamePhase::FADEOUT;
 		}
 
 		if (state->phase == GamePhase::PLAY || state->phase == GamePhase::FADEOUT) {
@@ -91,6 +103,24 @@ void MakeItBlack::mainLoop() {
 				lastRender = state->timeNow;
 			}
 		}
+		
+		if (state->phase == GamePhase::FADEIN || state->phase == GamePhase::FADEOUT) {
+			float fadeRatio = (float)(duration_cast<milliseconds>(high_resolution_clock::now() - fadeStart).count()) / 500.f;
+			float fade = std::min(1.0f, fadeRatio);
+			
+			if (state->phase == GamePhase::FADEIN) {
+				view->drawDimmer(1.0f - fade);
+				if (fade == 1.0f)
+					state->phase = GamePhase::PLAY;
+			}
+			else {
+				view->drawDimmer(fade);
+				if (fade == 1.0f)
+					state->phase = GamePhase::LOADNEXT;
+			}
+		}
+		
+		window->Display();
 	}
 }
 
@@ -99,6 +129,9 @@ void MakeItBlack::run() {
 	// make Window the Application, essentially
 	int viewW = Globals::STAGE_W * View::VIEW_SCALE,
 		viewH = Globals::STAGE_H * View::VIEW_SCALE;
+	
+	auto x = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+	state->randEngine.seed(static_cast<unsigned>(x));
 	
 	window.reset(new sf::RenderWindow(sf::VideoMode(viewW, viewH, 32), "Make It Black", sf::Style::Close));
 	

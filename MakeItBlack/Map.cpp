@@ -81,7 +81,16 @@ void MapLayer::eachTile(const std::function<void(int, int, Tile)> & callback) {
 }
 
 int MapLayer::countExposedTiles() {
-	return 50;
+	int exposed = 0;
+	eachTile([=,&exposed](int row, int col, Tile tilex) {
+		if (row > 0 && !tileAt(row - 1, col))
+			exposed++;
+		else if (col > 0 && !tileAt(row, col - 1))
+			exposed++;
+		else if (col < width - 1 && !tileAt(row, col + 1))
+			exposed++;
+	});
+	return exposed;
 }
 
 

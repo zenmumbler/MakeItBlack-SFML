@@ -30,6 +30,10 @@ void Game::load(const std::function<void()> & done) {
 	done();
 }
 
+void Game::checkMessages() {
+	
+}
+
 void Game::moveCamera() {
 	if ((state->player->locX - state->cameraX) > STAGE_W / 2) {
 		state->cameraX = std::min(((float)state->map->getWidth() * TILE_DIM) - STAGE_W - 1.0f, state->player->locX - (STAGE_W / 2));
@@ -54,6 +58,16 @@ void Game::step(float dt) {
 	}
 
 	moveCamera();
+	
+	checkMessages();
+	
+	if (state->completion == 1.0f) {
+		if (state->completionTime > state->timeNow) // completionTime is set to time::max initially
+			state->completionTime = state->timeNow;
+		
+		if (state->phase == GamePhase::PLAY && state->levelIndex < 3 && input.IsKeyDown(sf::Key::Return))
+			state->phase = GamePhase::END;
+	}
 }
 
 void Game::loadLevel(int index, const std::function<void()> & done) {
@@ -69,7 +83,9 @@ void Game::startLevel(int index, const std::function<void()> & done) {
 		state->exposedTiles = state->map->layer(0)->countExposedTiles();
 		state->tarnishedTiles = 0;
 		state->completion = 0;
-		state->completionTime = TimePoint::min();
+		state->completionTime = TimePoint::max();
+		
+		state->entities.clear();
 		
 		state->map->layer(1)->eachTile([=](int row, int col, Tile tilex) {
 			if (tilex == 9) { // heart

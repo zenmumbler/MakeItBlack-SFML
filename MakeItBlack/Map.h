@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <utility>
+#include <functional>
 
 // forward decl for rapidxml
 namespace rapidxml {
@@ -28,6 +29,7 @@ public:
 	uint32_t tileAt(int row, int col);
 	void setTileAt(int row, int col, uint32_t tile);
 	TileRange rangeOnRow(int row, int fromCol, int tileCount);
+	void eachTile(const std::function<void(int, int, Tile)> & callback);
 	
 	int countExposedTiles();
 };

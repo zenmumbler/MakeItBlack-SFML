@@ -1,18 +1,24 @@
 // MakeItBlack Native
 // (c) 2013 by Arthur Langereis
 
-#ifndef __MakeItBlack__Player__
-#define __MakeItBlack__Player__
+#ifndef __MakeItBlack__DarknessBlob__
+#define __MakeItBlack__DarknessBlob__
 
 #include "Entity.h"
 
-EntityRef makePlayer(State & state, float startX, float startY);
+EntityRef makeDarknessBlob(State & state, float startX, float startY, bool goingLeft, bool lowBeam);
 
+class BlobDelegate : public EntityDelegate {
+	static std::uniform_real_distribution<float> spewWidthVariance;
+	static std::uniform_real_distribution<float> spewHeightVariance;
 
-class PlayerDelegate : public EntityDelegate {
-	bool glarbl = false;
-
+	bool lowBeam;
+	
+	void tarnish(State & state, int row, int col);
+	
 public:
+	BlobDelegate(bool isLowBeam);
+
 	std::string type() const override;
 	void init(Entity & me, State & state) override;
 	TileIndex tileIndex(Entity & me, State & state) const override;
@@ -24,4 +30,4 @@ public:
 	void collidedWithEntity(Entity & me, State & state, Entity & other) override;
 };
 
-#endif /* defined(__MakeItBlack__Player__) */
+#endif /* defined(__MakeItBlack__DarknessBlob__) */

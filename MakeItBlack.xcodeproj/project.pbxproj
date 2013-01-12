@@ -15,6 +15,9 @@
 		8E37DFE016964DBA001FF824 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFDE16964DBA001FF824 /* Game.cpp */; };
 		8E37DFE316964E9F001FF824 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFE116964E9F001FF824 /* State.cpp */; };
 		8E37DFE7169656FC001FF824 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E37DFE5169656FC001FF824 /* View.cpp */; };
+		8E69B2BC16A0D89E00430154 /* Perishable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2BA16A0D89E00430154 /* Perishable.cpp */; };
+		8E69B2C016A0E20100430154 /* Heart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2BE16A0E20100430154 /* Heart.cpp */; };
+		8EAE47BA169F10AC00596974 /* DarknessBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAE47B8169F10AC00596974 /* DarknessBlob.cpp */; };
 		8EEC0F1A169E0BC100A15858 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC0F18169E0BC100A15858 /* Entity.cpp */; };
 		8EEC0F1F169E2F9F00A15858 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC0F1D169E2F9F00A15858 /* Player.cpp */; };
 		8EEEF34B169A218C00DE1FB2 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEEF349169A218C00DE1FB2 /* Map.cpp */; };
@@ -46,6 +49,12 @@
 		8E37DFE216964E9F001FF824 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		8E37DFE5169656FC001FF824 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
 		8E37DFE6169656FC001FF824 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		8E69B2BA16A0D89E00430154 /* Perishable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Perishable.cpp; sourceTree = "<group>"; };
+		8E69B2BB16A0D89E00430154 /* Perishable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perishable.h; sourceTree = "<group>"; };
+		8E69B2BE16A0E20100430154 /* Heart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Heart.cpp; sourceTree = "<group>"; };
+		8E69B2BF16A0E20100430154 /* Heart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Heart.h; sourceTree = "<group>"; };
+		8EAE47B8169F10AC00596974 /* DarknessBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DarknessBlob.cpp; sourceTree = "<group>"; };
+		8EAE47B9169F10AC00596974 /* DarknessBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarknessBlob.h; sourceTree = "<group>"; };
 		8EEC0F18169E0BC100A15858 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		8EEC0F19169E0BC100A15858 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		8EEC0F1D169E2F9F00A15858 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -137,8 +146,14 @@
 		8EEC0F1C169E2F8300A15858 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				8E69B2BE16A0E20100430154 /* Heart.cpp */,
+				8E69B2BF16A0E20100430154 /* Heart.h */,
+				8E69B2BA16A0D89E00430154 /* Perishable.cpp */,
+				8E69B2BB16A0D89E00430154 /* Perishable.h */,
 				8EEC0F1D169E2F9F00A15858 /* Player.cpp */,
 				8EEC0F1E169E2F9F00A15858 /* Player.h */,
+				8EAE47B8169F10AC00596974 /* DarknessBlob.cpp */,
+				8EAE47B9169F10AC00596974 /* DarknessBlob.h */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -225,6 +240,9 @@
 				8EEEF357169A41D000DE1FB2 /* base64.cpp in Sources */,
 				8EEC0F1A169E0BC100A15858 /* Entity.cpp in Sources */,
 				8EEC0F1F169E2F9F00A15858 /* Player.cpp in Sources */,
+				8EAE47BA169F10AC00596974 /* DarknessBlob.cpp in Sources */,
+				8E69B2BC16A0D89E00430154 /* Perishable.cpp in Sources */,
+				8E69B2C016A0E20100430154 /* Heart.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -70,6 +70,16 @@ TileRange MapLayer::rangeOnRow(int row, int fromCol, int tileCount) {
 	return { offset, offset + tileCount };
 }
 
+void MapLayer::eachTile(const std::function<void(int, int, Tile)> & callback) {
+	int off = 0;
+	for (int row=0; row<height; row++)
+		for (int col=0; col<width; col++) {
+			if (tileData[off])
+				callback(row, col, tileData[off]);
+			off++;
+		}
+}
+
 int MapLayer::countExposedTiles() {
 	return 50;
 }

@@ -7,6 +7,8 @@
 #include <memory>
 #include <chrono>
 #include <vector>
+#include <utility>
+#include <random>
 
 
 class Map;
@@ -44,7 +46,7 @@ public:
 	int levelIndex = -1;
 	TimePoint timeNow, fadeTime;
 	
-	int bile, disgust;
+	float bile, disgust;
 	
 	std::unique_ptr<Map> map;
 	int exposedTiles, tarnishedTiles;
@@ -57,10 +59,35 @@ public:
 	int frameCtr = 0;
 	float cameraX;
 	
-	State() = default;
+	std::mt19937 randEngine;
+	std::uniform_real_distribution<float> normalDistribution { 0.0f, 1.0f };
+	float random() { return normalDistribution(randEngine); }
+	
+	template <typename E, typename ...Args>
+	EntityRef makeEntity(Args... args);
+
+	template <typename E>
+	EntityRef makeEntity();
 };
 
 using StateRef = std::shared_ptr<State>;
+
+
+template<typename E, typename ...Args>
+EntityRef State::makeEntity(Args... args) {
+	std::unique_ptr<EntityDelegate> delegate { new E(std::forward<Args...>(args...)) };
+	EntityRef ent = std::make_shared<Entity>(*this, std::move(delegate));
+	entities.push_back(ent);
+	return std::move(ent);
+}
+
+template<typename E>
+EntityRef State::makeEntity() {
+	std::unique_ptr<EntityDelegate> delegate { new E() };
+	EntityRef ent = std::make_shared<Entity>(*this, std::move(delegate));
+	entities.push_back(ent);
+	return std::move(ent);
+}
 
 
 #endif /* defined(__MakeItBlack__State__) */

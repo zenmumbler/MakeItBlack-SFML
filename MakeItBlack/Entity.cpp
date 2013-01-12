@@ -13,9 +13,8 @@ int Entity::globalID = 0;
 using namespace Globals;
 
 
-Entity::Entity(std::string typeName, StateRef theState, std::unique_ptr<EntityDelegate> del)
-	: type{ typeName }
-	, state{ theState }
+Entity::Entity(State & theState, std::unique_ptr<EntityDelegate> del)
+	: state{ theState }
 	, delegate{ std::move(del) }
 {
 	delegate->init(*this, state);
@@ -30,17 +29,17 @@ bool Entity::isOnFloor() {
 	
 	// -- rather critical test
 	if((tileVOffset == TILE_DIM - 1) && velY >= 0.0f) {
-		if (state->map->layer(0)->tileAt(locRow + 1, locCol))
+		if (state.map->layer(0)->tileAt(locRow + 1, locCol))
 			onFloor = true;
-		if ((tileHOffset > 0) && state->map->layer(0)->tileAt(locRow + 1, locCol + 1))
+		if ((tileHOffset > 0) && state.map->layer(0)->tileAt(locRow + 1, locCol + 1))
 			onFloor = true;
 	}
-	
+
 	return onFloor;
 }
 
 void Entity::move(float dt) {
-	MapLayer & backLayer { *state->map->layer(0) };
+	MapLayer & backLayer { *state.map->layer(0) };
 	int locRow = std::floor(locY / TILE_DIM),
 		locCol = std::floor((locX + 1.0f) / TILE_DIM),
 		tileHOffset = ((int)std::round(locX)) & ((int)TILE_DIM - 1);
@@ -51,6 +50,7 @@ void Entity::move(float dt) {
 		testY = (int)(std::round(tryY)),
 		testCol, testRow;
 	Tile tileA, tileB;
+	TileIndex hitCoord { 0, 0 };
 
 	// -- normal movement is handled by the entity, but gravity is applied globally
 	if (! isOnFloor())
@@ -64,8 +64,13 @@ void Entity::move(float dt) {
 			tileB = backLayer.tileAt(locRow - height + 1, testCol);
 			
 			if (tileA || tileB) {
+				if (tileA)
+					hitCoord = { locRow, testCol };
+				else
+					hitCoord = { locRow - height + 1, testCol };
+
 				tryX = ((testCol + 1) * TILE_DIM);
-				delegate->collidedWithWall(*this, state);
+				delegate->collidedWithWall(*this, state, hitCoord);
 				velX = 0;
 			}
 		}
@@ -75,15 +80,19 @@ void Entity::move(float dt) {
 			tileB = backLayer.tileAt(locRow - height + 1, testCol);
 			
 			if (tileA || tileB) {
+				if (tileA)
+					hitCoord = { locRow, testCol };
+				else
+					hitCoord = { locRow - height + 1, testCol };
+				
 				tryX = ((testCol - width) * TILE_DIM);
-				delegate->collidedWithWall(*this, state);
+				delegate->collidedWithWall(*this, state, hitCoord);
 				velX = 0;
 			}
 		}
 		
 		// -- update speed
 		locX = tryX;
-		testX = std::round(tryX);
 		locCol = std::floor((tryX + 1) / TILE_DIM);
 	}
 
@@ -95,8 +104,13 @@ void Entity::move(float dt) {
 			tileB = backLayer.tileAt(testRow, locCol + 1); // + intf.width
 			
 			if (tileA || (((tileHOffset > 0) || (width > 1.0f)) && tileB)) {
+				if (tileA)
+					hitCoord = { testRow, locCol };
+				else
+					hitCoord = { testRow, locCol + 1 };
+				
 				tryY = ((testRow + height + 1) * TILE_DIM) - 1;
-				delegate->collidedWithCeiling(*this, state);
+				delegate->collidedWithCeiling(*this, state, hitCoord);
 				velY = 0;
 			}
 		}
@@ -106,16 +120,19 @@ void Entity::move(float dt) {
 			tileB = backLayer.tileAt(testRow, locCol + 1); // + intf.width
 			
 			if (tileA || (((tileHOffset > 0) || (width > 1.0f)) && tileB)) {
+				if (tileA)
+					hitCoord = { testRow, locCol };
+				else
+					hitCoord = { testRow, locCol + 1 };
+				
 				tryY = (testRow * TILE_DIM) - 1;
-				delegate->collidedWithFloor(*this, state);
+				delegate->collidedWithFloor(*this, state, hitCoord);
 				velY = 0;
 			}
 		}
 
 		// -- update state
 		locY = tryY;
-		testY = std::round(tryY);
-		locRow = std::floor(tryY / TILE_DIM);
 	}
 }
 
@@ -125,7 +142,7 @@ void Entity::checkEntityCollisions() {
 		ayt = locY - (height * TILE_DIM),
 		ayb = locY;
 	
-	for (auto other : state->entities) {
+	for (EntityRef & other : state.entities) {
 		if (other->id == id)
 			continue;
 
@@ -136,7 +153,7 @@ void Entity::checkEntityCollisions() {
 
 		if (axl < bxr && axr > bxl && ayt < byb && ayb > byt) {
 			delegate->collidedWithEntity(*this, state, *other);
-			other->collidedWithEntity(*other);
+			other->collidedWithEntity(*this);
 		}
 	}
 }
@@ -149,4 +166,12 @@ void Entity::act(float dt, const sf::Input & input) {
 	delegate->act(*this, state, input);
 	move(dt);
 	checkEntityCollisions();
+}
+
+TileIndex Entity::tileIndex() {
+	return delegate->tileIndex(*this, state);
+}
+
+std::string Entity::type() {
+	return delegate->type();
 }

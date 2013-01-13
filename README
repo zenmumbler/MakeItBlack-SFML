@@ -11,7 +11,7 @@ Use your dark bile and turn this place into a wonderful place of darkness if you
 Full game with in-game explanation and end sequence. There is even a goat. Play time about 10-15 mins. 
 
 * Requires Mac OS X 10.7 Lion or higher, source should be compilable on Win and Linux, will try soon.
-* C++11, SFML, Platformer, Single Player. 
+* C++11, SFML 1.6, Platformer, Single Player, Competition entry
 
 
 Ludum Dare

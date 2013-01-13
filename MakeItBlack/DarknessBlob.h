@@ -28,6 +28,8 @@ public:
 	void collidedWithFloor(Entity & me, State & state, const TileIndex & hitCoord) override;
 	void collidedWithCeiling(Entity & me, State & state, const TileIndex & hitCoord) override;
 	void collidedWithEntity(Entity & me, State & state, Entity & other) override;
+	
+	float attackPower() const override { return 4.f; }
 };
 
 #endif /* defined(__MakeItBlack__DarknessBlob__) */

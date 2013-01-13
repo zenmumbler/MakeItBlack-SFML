@@ -141,7 +141,7 @@ void View::drawSprites() {
 
 		float left = std::round(ent->locX - state->cameraX) * VIEW_SCALE;
 		float top = std::round(ent->locY - pixHeight + 1.f) * VIEW_SCALE;
-		
+
 		tRect.Left = (tilex & 7) * 8;
 		tRect.Top = tilex & 0xf8;
 		tRect.Right = tRect.Left + pixWidth;
@@ -149,6 +149,18 @@ void View::drawSprites() {
 
 		sp.SetPosition(left, top);
 		sp.SetSubRect(tRect);
+		if (ent->enemy) {
+			float ealp = ((float)ent->HP / 100.f) * 255.f;
+			sp.SetColor({ 255, 255, 255,  ealp});
+		}
+		
+		if (ent->type() == "player" && !ent->alive()) {
+			float scale = (1.f + (state->deathRatio * 4.f)) * VIEW_SCALE;
+
+			sp.SetRotation(-25.f + state->random() * 50.f);
+			sp.SetScale(scale, scale);
+			sp.SetColor({ 255, 255, 255, 50.f + 180.f * state->random() });
+		}
 
 		window->Draw(sp);
 	}
@@ -196,6 +208,45 @@ void View::drawTextBox(const std::string & title, const std::string & message) {
 	prtc.SetCenter(prtc.GetRect().GetWidth() / 2, prtc.GetRect().GetHeight());
 	prtc.SetPosition(480, 405);
 	window->Draw(prtc);
+}
+
+
+void View::drawLevelComplete() {
+	std::string title;
+	auto msSinceDone = std::chrono::duration_cast<std::chrono::milliseconds>(state->timeNow - state->completionTime).count();
+	float slideRatio = std::min(1.0f, msSinceDone / 1500.f);
+	slideRatio *= slideRatio;
+
+	if (state->levelIndex == 3)
+		title = "All Clear";
+	else
+		title = "Level Complete";
+
+	std::vector<std::string> subs = {
+		"Didn't that feel good?", "Mick Jagger is proud of you.", "Your salivary glands must be HUGE.",
+		"Here's your damn goat."
+	};
+	auto subtitle = subs[state->levelIndex];
+
+	sf::String ttl { title, font, 90 };
+	ttl.SetCenter(ttl.GetRect().GetWidth() / 2.f, ttl.GetRect().GetHeight());
+	ttl.SetPosition(480.f, -60.f + (300.f * slideRatio));
+	window->Draw(ttl);
+
+	if (slideRatio == 1.0f) {
+		sf::String sttl { subtitle, font, 30 };
+		sttl.SetColor({ 0x49, 0xa2, 0x55 });
+		sttl.SetCenter(sttl.GetRect().GetWidth() / 2.f, sttl.GetRect().GetHeight());
+		sttl.SetPosition(480.f, 300.f);
+		window->Draw(sttl);
+
+		if (state->levelIndex < 3 && (state->frameCtr & 32)) {
+			sf::String prtc { "-- press return to proceed --", font, 24 };
+			prtc.SetCenter(prtc.GetRect().GetWidth() / 2.f, prtc.GetRect().GetHeight());
+			prtc.SetPosition(480.f, 540.f);
+			window->Draw(prtc);
+		}
+	}
 }
 
 
@@ -273,6 +324,9 @@ void View::render() {
 		if (window->GetInput().IsKeyDown(sf::Key::Return))
 			state->phase = GamePhase::PLAY;
 	}
+
+	if (state->completion == 1.0f)
+		drawLevelComplete();
 
 //	sf::String text { std::to_string(window->GetFrameTime()), font, 48.0f };
 //	text.SetColor(sf::Color::White);

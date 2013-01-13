@@ -11,6 +11,8 @@
 #include "DarknessBlob.h"
 #include "Perishable.h"
 #include "Heart.h"
+#include "Fuzzle.h"
+#include "Pet.h"
 
 using namespace Globals;
 
@@ -70,8 +72,15 @@ void Game::moveCamera() {
 }
 
 void Game::step(float dt) {
-	// need to cover 82% of exposed tiles to complete level
-	state->completion = std::min(1.0, ((float)state->tarnishedTiles / state->exposedTiles) / 0.82);
+	if (state->levelIndex < 3) {
+		// need to cover 82% of exposed tiles to complete level
+		state->completion = std::min(1.0, ((float)state->tarnishedTiles / state->exposedTiles) / 0.82);
+	}
+	else {
+		float c = std::min(1.0f, state->player->locX / 420.f);
+		if (c > state->completion)
+			state->completion = c;
+	}
 
 	// remove entities from play that have their removeMe flag set
 	state->entities.erase(
@@ -93,6 +102,16 @@ void Game::step(float dt) {
 		
 		if (state->phase == GamePhase::PLAY && state->levelIndex < 3 && input.IsKeyDown(sf::Key::Return))
 			state->phase = GamePhase::END;
+	}
+
+	if (! state->player->alive()) {
+		auto timeSinceDeath = std::chrono::duration_cast<std::chrono::milliseconds>(state->timeNow - state->timeOfDeath);
+		state->deathRatio = std::min(1.0f, timeSinceDeath.count() / 2000.f);
+
+		if (state->deathRatio == 1.0f) {
+			state->levelIndex--;
+			state->phase = GamePhase::LOADNEXT;
+		}
 	}
 }
 
@@ -124,10 +143,24 @@ void Game::startLevel(int index, const std::function<void()> & done) {
 
 		switch (index) {
 			case 1:
+				makeFuzzle(*state, 100, 50);
+				makeFuzzle(*state, 350, 40);
+				makeFuzzle(*state, 600, 40);
+				
+				makeFuzzle(*state, 100, 165);
+				makeFuzzle(*state, 270, 160);
+				makeFuzzle(*state, 360, 180);
 				break;
+
 			case 2:
+				makeFuzzle(*state, 75,  110);
+				makeFuzzle(*state, 220, 130);
+				makeFuzzle(*state, 380, 100);
+				makeFuzzle(*state, 610, 60);
 				break;
+
 			case 3:
+				makePet(*state, 550, 140);
 				break;
 				
 			default: break;

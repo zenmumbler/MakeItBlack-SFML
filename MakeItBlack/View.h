@@ -45,6 +45,7 @@ class View {
 	void drawMeters();
 	void drawSprites();
 	void drawBG();
+	void drawTextBox(const std::string & title, const std::string & message);
 	
 public:
 	constexpr static float VIEW_SCALE = 3.0f;

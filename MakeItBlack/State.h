@@ -59,6 +59,10 @@ public:
 	int frameCtr = 0;
 	float cameraX;
 	
+	std::string msgTitle, msgText;
+	
+	// --
+	
 	std::mt19937 randEngine;
 	std::uniform_real_distribution<float> normalDistribution { 0.0f, 1.0f };
 	float random() { return normalDistribution(randEngine); }

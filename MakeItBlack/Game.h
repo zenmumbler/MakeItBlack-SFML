@@ -17,6 +17,7 @@
 class Game {
 	StateRef state;
 	const sf::Input & input;
+	bool messageA = false, messageB = false, messageC = false;
 	
 	void loadLevel(int index, const std::function<void()> & done);
 	void moveCamera();

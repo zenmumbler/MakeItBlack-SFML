@@ -1,10 +1,11 @@
 // MakeItBlack Native
 // (c) 2013 by Arthur Langereis
 
+#include <sstream>
+#include <cmath>
 #include "Map.h"
 #include "View.h"
 #include "Entity.h"
-#include <cmath>
 
 using namespace Globals;
 
@@ -87,14 +88,16 @@ void View::drawClouds() {
 
 void View::drawMeters() {
 	sf::String bileLabel { "Bile", font, 18.0f };
-	bileLabel.SetPosition(30, 10);
+	bileLabel.SetPosition(30, 8);
 	sf::String disgustLabel { "Disgust", font, 18.0f };
-	disgustLabel.SetPosition(STAGE_W * VIEW_SCALE - 324.f, 10);
+	disgustLabel.SetPosition(STAGE_W * VIEW_SCALE - 324.f, 8);
 
 	sf::Color disgustColor { 0x49, 0xa2, 0x55 };
 
 	// Bile Meter
-	window->Draw(sf::Shape::Rectangle(24, 24, 24 + 306, 24 + 18, sf::Color::White));
+	auto border = sf::Shape::Rectangle(24, 24, 24 + 306, 24 + 18, sf::Color::White, 3.f, sf::Color::White);
+	border.EnableFill(false);
+	window->Draw(border);
 	window->Draw(sf::Shape::Rectangle(27, 27, 27 + (state->bile * 3), 27 + 12, sf::Color::Black));
 	window->Draw(bileLabel);
 	bileLabel.Move(-1.f, -1.f);
@@ -104,7 +107,9 @@ void View::drawMeters() {
 	// Disgust Meter
 	if (state->levelIndex > -1 && state->levelIndex < 3) {
 		float left = (VIEW_SCALE * STAGE_W) - 306.f - 24.f;
-		window->Draw(sf::Shape::Rectangle(left, 24, left + 306, 24 + 18, sf::Color::White));
+		border = sf::Shape::Rectangle(left, 24, left + 306, 24 + 18, sf::Color::White, 3.f, sf::Color::White);
+		border.EnableFill(false);
+		window->Draw(border);
 		window->Draw(sf::Shape::Rectangle(left + 3, 27, left + 3 + (state->disgust * 3), 27 + 12, disgustColor));
 
 		disgustLabel.SetColor(sf::Color::Black);
@@ -144,6 +149,50 @@ void View::drawSprites() {
 
 		window->Draw(sp);
 	}
+}
+
+
+void View::drawTextBox(const std::string & title, const std::string & message) {
+	// x: 150, y: 120, w: 660, h: 300, infl: 100
+	sf::Shape box;
+	sf::Color gray(50, 50, 50);
+	box.AddPoint(0  ,  0, sf::Color::Black);
+	box.AddPoint(660,  0, sf::Color::Black);
+	box.AddPoint(660,300, gray);
+	box.AddPoint(0  ,300, gray);
+	box.SetPosition(150.f, 120.f);
+	window->Draw(box);
+
+	sf::Shape border = sf::Shape::Rectangle(0.f, 0.f, 648.f, 288.f, sf::Color::White, 3.f, { 0xcc, 0xcc, 0xcc });
+	border.EnableFill(false);
+	border.SetPosition(156.f, 126.f);
+	window->Draw(border);
+
+	sf::String ttl { title, font, 30.f };
+	ttl.SetColor({ 0xac, 0x16, 0x02 });
+	ttl.SetCenter(ttl.GetRect().GetWidth() / 2, ttl.GetRect().GetHeight());
+	ttl.SetPosition(480, 165);
+	window->Draw(ttl);
+
+	std::istringstream iss { message };
+	float lineY = 210.f;
+	while (!iss.eof()) {
+		std::string line;
+		std::getline(iss, line);
+		
+		sf::String slin { line, font, 24.f };
+		slin.SetColor(sf::Color::White);
+		slin.SetCenter(slin.GetRect().GetWidth() / 2, slin.GetRect().GetHeight());
+		slin.SetPosition(480, lineY);
+		lineY += 30.f;
+		window->Draw(slin);
+	}
+
+	sf::String prtc { "-- press return to continue --", font, 15.f };
+	prtc.SetColor({ 0xaa, 0xaa, 0xaa });
+	prtc.SetCenter(prtc.GetRect().GetWidth() / 2, prtc.GetRect().GetHeight());
+	prtc.SetPosition(480, 405);
+	window->Draw(prtc);
 }
 
 
@@ -214,6 +263,13 @@ void View::render() {
 	drawSprites();
 	drawClouds();
 	drawMeters();
+	
+	if (state->phase == GamePhase::MESSAGE) {
+		drawTextBox(state->msgTitle, state->msgText);
+		
+		if (window->GetInput().IsKeyDown(sf::Key::Return))
+			state->phase = GamePhase::PLAY;
+	}
 
 //	sf::String text { std::to_string(window->GetFrameTime()), font, 48.0f };
 //	text.SetColor(sf::Color::White);

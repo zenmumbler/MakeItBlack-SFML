@@ -31,7 +31,33 @@ void Game::load(const std::function<void()> & done) {
 }
 
 void Game::checkMessages() {
+	if (state->phase != GamePhase::PLAY)
+		return;
+
+	if (state->levelIndex == 0) {
+		if (!messageA && state->player->locX > 50) {
+			messageA = true;
+			state->phase = GamePhase::MESSAGE;
+			state->msgTitle = "Oh bollocks";
+			state->msgText  = "So, on the way back to your dark dimension\nyou wound up on some lovey-dovey world!\n\nTo proceed you must darken things up.\nWalk and jump with ARROWS and spew with SPACE,\ncover the place in darkness!";
+		}
+
+		if (!messageB && state->player->locX > 250) {
+			messageB = true;
+			state->phase = GamePhase::MESSAGE;
+			state->msgTitle = "By the way...";
+			state->msgText  = "\nYou can SPEW at a LOWER ANGLE by\nholding the DOWN arrow while holding SPACE.\n\nTarnish away!";
+		}
+	}
 	
+	if (state->levelIndex == 1) {
+		if (!messageC && state->player->locX > 25) {
+			messageC = true;
+			state->phase = GamePhase::MESSAGE;
+			state->msgTitle = "Ewwww";
+			state->msgText  = "Just being here makes you sick\nso DON'T TOUCH the fuzzies or the HEARTS!\nKeep an eye on your DISGUST METER.\n\nYou can eliminate the fuzzies but not the hearts.\nPower of love 'n all that.";
+		}
+	}
 }
 
 void Game::moveCamera() {

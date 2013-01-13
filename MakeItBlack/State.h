@@ -50,8 +50,8 @@ public:
 	
 	std::unique_ptr<Map> map;
 	int exposedTiles, tarnishedTiles;
-	float completion;
-	TimePoint completionTime;
+	float completion, deathRatio = 0.0f;
+	TimePoint completionTime, timeOfDeath;
 	
 	std::vector<EntityRef> entities;
 	Entity * player = nullptr;

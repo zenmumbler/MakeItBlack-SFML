@@ -49,21 +49,30 @@ TileIndex PlayerDelegate::tileIndex(Entity & me, State & state) const {
 }
 
 void PlayerDelegate::act(Entity & me, State & state, const sf::Input & input) {
+	if (! me.alive()) {
+		me.velX = me.velY = 0.f;
+		return;
+	}
+
 	if (input.IsKeyDown(sf::Key::Left)) {
-		me.velX = -PLAYER_SPEED_SEC;
+		walkSpeed = -PLAYER_SPEED_SEC;
 		me.lookLeft = true;
 	}
 	else if (input.IsKeyDown(sf::Key::Right)) {
-		me.velX = PLAYER_SPEED_SEC;
+		walkSpeed = PLAYER_SPEED_SEC;
 		me.lookLeft = false;
 	}
 	else
-		me.velX = 0.f;
+		walkSpeed = 0.f;
 
+	hitSpeed *= 0.6f;
+	if (hitSpeed < 10.f) hitSpeed = 0.f;
+	me.velX = walkSpeed + hitSpeed;
+	
 	if (me.isOnFloor() && input.IsKeyDown(sf::Key::Up)) {
 		me.velY = -PLAYER_JUMP_SPEED_SEC;
 	}
-
+	
 	if (input.IsKeyDown(sf::Key::Space)) {
 		if (state.bile <= 0)
 			return;
@@ -91,4 +100,16 @@ void PlayerDelegate::collidedWithFloor(Entity & me, State & state, const TileInd
 void PlayerDelegate::collidedWithCeiling(Entity & me, State & state, const TileIndex & hitCoord) {}
 
 void PlayerDelegate::collidedWithEntity(Entity & me, State & state, Entity & other) {
+	if (me.alive() && (! me.invulnerable) && other.enemy && other.alive()) {
+		me.takeDamage(other.attackPower());
+		state.disgust = 100.f - me.HP;
+
+		if (! me.alive()) { // this last hit killed us
+			state.timeOfDeath = state.timeNow;
+		}
+		else {
+			hitSpeed = me.locX > other.locX ? PLAYER_HIT_SPEED_BOOST : -PLAYER_HIT_SPEED_BOOST;
+			me.invulnerableFor(2000);
+		}
+	}
 }

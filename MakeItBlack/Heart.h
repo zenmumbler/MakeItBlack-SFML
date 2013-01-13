@@ -20,6 +20,8 @@ public:
 	virtual void act(Entity & me, State & state, const sf::Input & input) override;
 	
 	virtual void collidedWithEntity(Entity & me, State & state, Entity & other) override;
+	
+	virtual float attackPower() const override { return 24.f; }
 };
 
 

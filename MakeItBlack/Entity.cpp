@@ -163,7 +163,13 @@ void Entity::collidedWithEntity(Entity & other) {
 }
 
 void Entity::act(float dt, const sf::Input & input) {
+	if (invulnerable) {
+		if (state.timeNow > invulnerableUntil)
+			invulnerable = false;
+	}
+	
 	delegate->act(*this, state, input);
+
 	move(dt);
 	checkEntityCollisions();
 }
@@ -174,4 +180,17 @@ TileIndex Entity::tileIndex() {
 
 std::string Entity::type() {
 	return delegate->type();
+}
+
+void Entity::takeDamage(float damage) {
+	HP = std::max(0.f, HP - damage);
+}
+
+float Entity::attackPower() const {
+	return delegate->attackPower();
+}
+
+void Entity::invulnerableFor(int ms) {
+	invulnerable = true;
+	invulnerableUntil = state.timeNow + std::chrono::milliseconds(ms);
 }

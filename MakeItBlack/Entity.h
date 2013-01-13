@@ -32,7 +32,9 @@ public:
 	TimePoint nextAction;
 
 	bool enemy = false;
-	int HP = 100;
+	float HP = 100.f;
+	bool invulnerable = false;
+	TimePoint invulnerableUntil;
 
 	Entity(State & theState, std::unique_ptr<EntityDelegate> delegate);
 	Entity(const Entity &) = delete;
@@ -43,7 +45,11 @@ public:
 	bool isOnFloor();
 	TileIndex tileIndex();
 	std::string type();
+
 	bool alive() { return HP > 0; }
+	void takeDamage(float damage);
+	float attackPower() const;
+	void invulnerableFor(int ms);
 };
 
 
@@ -56,6 +62,8 @@ public:
 	virtual TileIndex tileIndex(Entity & me, State & state) const = 0;
 	virtual void act(Entity & me, State & state, const sf::Input & input) = 0;
 
+	virtual float attackPower() const { return 0; }
+	
 	virtual void collidedWithWall(Entity & me, State & state, const TileIndex & hitCoord) {}
 	virtual void collidedWithFloor(Entity & me, State & state, const TileIndex & hitCoord) {}
 	virtual void collidedWithCeiling(Entity & me, State & state, const TileIndex & hitCoord) {}

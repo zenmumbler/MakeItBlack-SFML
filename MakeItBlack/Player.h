@@ -11,6 +11,7 @@ EntityRef makePlayer(State & state, float startX, float startY);
 
 class PlayerDelegate : public EntityDelegate {
 	bool glarbl = false;
+	float walkSpeed = 0.0f, hitSpeed = 0.0f;
 
 public:
 	std::string type() const override;

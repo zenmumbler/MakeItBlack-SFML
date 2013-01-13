@@ -130,6 +130,9 @@ void View::drawSprites() {
 	sp.SetScale(VIEW_SCALE, VIEW_SCALE);
 
 	for (auto ent : state->entities) {
+		if (ent->invulnerable && (state->frameCtr & 1))
+			continue;
+
 		float pixWidth = ent->width * TILE_DIM;
 		float pixHeight  = ent->height * TILE_DIM;
 

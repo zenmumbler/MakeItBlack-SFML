@@ -13,7 +13,7 @@ using namespace Globals;
 void Cloud::makeSeg() {
 	Seg s;
 	s.cx = baseX - 45.f + (90.f * state.random());
-	s.cy = baseY - 45.f + (90.f * state.random());
+	s.cy = baseY - 18.f + (36.f * state.random());
 	s.rad = 15 + (15.f * state.random());
 	s.alpha = 38 + (20 * state.random());
 	segs.push_back(s);
@@ -149,9 +149,9 @@ void View::drawSprites() {
 
 		sp.SetPosition(left, top);
 		sp.SetSubRect(tRect);
-		if (ent->enemy) {
-			float ealp = ((float)ent->HP / 100.f) * 255.f;
-			sp.SetColor({ 255, 255, 255,  ealp});
+		if (ent->type() == "fuzzle") {
+			int ealp = (ent->HP / 100.f) * 255.f;
+			sp.SetColor({ 255, 255, 255, ealp });
 		}
 		
 		if (ent->type() == "player" && !ent->alive()) {

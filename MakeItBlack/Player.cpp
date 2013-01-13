@@ -1,9 +1,10 @@
 // MakeItBlack Native
 // (c) 2013 by Arthur Langereis
 
+#include <SFML/Window.hpp>
 #include "Player.h"
 #include "DarknessBlob.h"
-#include <SFML/Window.hpp>
+#include "Sound.h"
 
 namespace {
 	constexpr static float PLAYER_SPEED_SEC = 60.0f;
@@ -71,6 +72,7 @@ void PlayerDelegate::act(Entity & me, State & state, const sf::Input & input) {
 	
 	if (me.isOnFloor() && input.IsKeyDown(sf::Key::Up)) {
 		me.velY = -PLAYER_JUMP_SPEED_SEC;
+		state.sound->play("jump");
 	}
 	
 	if (input.IsKeyDown(sf::Key::Space)) {
@@ -95,9 +97,8 @@ void PlayerDelegate::act(Entity & me, State & state, const sf::Input & input) {
 void PlayerDelegate::collidedWithWall(Entity & me, State & state, const TileIndex & hitCoord) {}
 
 void PlayerDelegate::collidedWithFloor(Entity & me, State & state, const TileIndex & hitCoord) {
+	state.sound->play("land");
 }
-
-void PlayerDelegate::collidedWithCeiling(Entity & me, State & state, const TileIndex & hitCoord) {}
 
 void PlayerDelegate::collidedWithEntity(Entity & me, State & state, Entity & other) {
 	if (me.alive() && (! me.invulnerable) && other.enemy && other.alive()) {
@@ -106,10 +107,12 @@ void PlayerDelegate::collidedWithEntity(Entity & me, State & state, Entity & oth
 
 		if (! me.alive()) { // this last hit killed us
 			state.timeOfDeath = state.timeNow;
+			state.sound->play("die");
 		}
 		else {
 			hitSpeed = me.locX > other.locX ? PLAYER_HIT_SPEED_BOOST : -PLAYER_HIT_SPEED_BOOST;
 			me.invulnerableFor(2000);
+			state.sound->play("hit");
 		}
 	}
 }

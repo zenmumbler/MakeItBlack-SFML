@@ -46,7 +46,7 @@ public:
 	TileIndex tileIndex();
 	std::string type();
 
-	bool alive() { return HP > 0; }
+	bool alive() { return HP > 0.f; }
 	void takeDamage(float damage);
 	float attackPower() const;
 	void invulnerableFor(int ms);

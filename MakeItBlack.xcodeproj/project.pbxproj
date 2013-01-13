@@ -19,6 +19,7 @@
 		8E69B2C016A0E20100430154 /* Heart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2BE16A0E20100430154 /* Heart.cpp */; };
 		8E69B2C716A339FE00430154 /* Fuzzle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2C516A339FE00430154 /* Fuzzle.cpp */; };
 		8E69B2CA16A34F9700430154 /* Pet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2C816A34F9600430154 /* Pet.cpp */; };
+		8E69B2CD16A35EFF00430154 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E69B2CB16A35EFE00430154 /* Sound.cpp */; };
 		8EAE47BA169F10AC00596974 /* DarknessBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAE47B8169F10AC00596974 /* DarknessBlob.cpp */; };
 		8EEC0F1A169E0BC100A15858 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC0F18169E0BC100A15858 /* Entity.cpp */; };
 		8EEC0F1F169E2F9F00A15858 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC0F1D169E2F9F00A15858 /* Player.cpp */; };
@@ -59,6 +60,8 @@
 		8E69B2C616A339FE00430154 /* Fuzzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fuzzle.h; sourceTree = "<group>"; };
 		8E69B2C816A34F9600430154 /* Pet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pet.cpp; sourceTree = "<group>"; };
 		8E69B2C916A34F9700430154 /* Pet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
+		8E69B2CB16A35EFE00430154 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		8E69B2CC16A35EFF00430154 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		8EAE47B8169F10AC00596974 /* DarknessBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DarknessBlob.cpp; sourceTree = "<group>"; };
 		8EAE47B9169F10AC00596974 /* DarknessBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarknessBlob.h; sourceTree = "<group>"; };
 		8EEC0F18169E0BC100A15858 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 				8EEC0F18169E0BC100A15858 /* Entity.cpp */,
 				8E37DFDE16964DBA001FF824 /* Game.cpp */,
 				8EEEF349169A218C00DE1FB2 /* Map.cpp */,
+				8E69B2CB16A35EFE00430154 /* Sound.cpp */,
 				8E37DFC816964013001FF824 /* main.cpp */,
 			);
 			path = MakeItBlack;
@@ -145,6 +149,7 @@
 				8EEC0F19169E0BC100A15858 /* Entity.h */,
 				8E37DFDF16964DBA001FF824 /* Game.h */,
 				8EEEF34A169A218C00DE1FB2 /* Map.h */,
+				8E69B2CC16A35EFF00430154 /* Sound.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				8E69B2C016A0E20100430154 /* Heart.cpp in Sources */,
 				8E69B2C716A339FE00430154 /* Fuzzle.cpp in Sources */,
 				8E69B2CA16A34F9700430154 /* Pet.cpp in Sources */,
+				8E69B2CD16A35EFF00430154 /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

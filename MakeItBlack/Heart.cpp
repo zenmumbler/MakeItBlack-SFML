@@ -13,7 +13,7 @@ EntityRef makeHeart(State & state, float startX, float startY) {
 
 
 std::string HeartDelegate::type() const {
-	return "perishable";
+	return "heart";
 }
 
 void HeartDelegate::init(Entity & me, State & state) {

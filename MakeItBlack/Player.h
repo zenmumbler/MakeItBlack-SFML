@@ -21,7 +21,6 @@ public:
 	
 	void collidedWithWall(Entity & me, State & state, const TileIndex & hitCoord) override;
 	void collidedWithFloor(Entity & me, State & state, const TileIndex & hitCoord) override;
-	void collidedWithCeiling(Entity & me, State & state, const TileIndex & hitCoord) override;
 	void collidedWithEntity(Entity & me, State & state, Entity & other) override;
 };
 

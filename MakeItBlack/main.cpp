@@ -9,6 +9,7 @@
 #include "State.h"
 #include "Game.h"
 #include "View.h"
+#include "Sound.h"
 #include "Entity.h"
 
 
@@ -24,6 +25,7 @@ class MakeItBlack {
 	StateRef state { std::make_shared<State>() };
 	std::unique_ptr<Game> game;
 	std::unique_ptr<View> view;
+	std::unique_ptr<Sound> sound;
 	
 	std::shared_ptr<sf::RenderWindow> window;
 
@@ -137,13 +139,18 @@ void MakeItBlack::run() {
 	
 	game.reset(new Game(state, window->GetInput()));
 	view.reset(new View(state, window));
+	sound.reset(new Sound());
+	
+	state->sound = sound.get();
 
-	game->load([this] {
-		view->load([this] {
-			running = true;
-			state->phase = GamePhase::LOADNEXT;
-			lastStep = lastRender = std::chrono::high_resolution_clock::now();
-			mainLoop();
+	game->load([=] {
+		view->load([=] {
+			sound->load([=] {
+				running = true;
+				state->phase = GamePhase::LOADNEXT;
+				lastStep = lastRender = std::chrono::high_resolution_clock::now();
+				mainLoop();
+			});
 		});
 	});
 }

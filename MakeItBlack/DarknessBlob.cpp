@@ -3,15 +3,17 @@
 
 #include "DarknessBlob.h"
 #include "Map.h"
+#include "Sound.h"
 
 namespace {
 	constexpr static float BLOB_HORIZ_SPEED = 90;
 	constexpr static float BLOB_VERT_SPEED = -60;
-	constexpr static float BLOB_VERT_SPEED_LOW = 5;
+	constexpr static float BLOB_VERT_SPEED_LOW = 15;
 }
 
 std::uniform_real_distribution<float> BlobDelegate::spewWidthVariance { 0.f, 0.5f };
 std::uniform_real_distribution<float> BlobDelegate::spewHeightVariance { 0.f, 0.3f };
+TimePoint BlobDelegate::lastSplat;
 
 
 EntityRef makeDarknessBlob(State & state, float startX, float startY, bool goingLeft, bool lowBeam) {
@@ -59,6 +61,12 @@ void BlobDelegate::tarnish(State & state, int row, int col) {
 		layer.setTileAt(row, col, tilex + 16);
 		state.tarnishedTiles++;
 	}
+
+	auto msSinceLast = std::chrono::duration_cast<std::chrono::milliseconds>(state.timeNow - lastSplat).count();
+	if (msSinceLast > 50) {
+		lastSplat = state.timeNow;
+		state.sound->play("splat");
+	}
 }
 
 void BlobDelegate::collidedWithWall(Entity & me, State & state, const TileIndex & hitCoord) {
@@ -81,6 +89,13 @@ void BlobDelegate::collidedWithCeiling(Entity & me, State & state, const TileInd
 
 void BlobDelegate::collidedWithEntity(Entity & me, State & state, Entity & other) {
 	auto otherType = other.type();
-	if (otherType != "blob" && otherType != "player" && other.alive())
+	if (otherType != "blob" && otherType != "player" && other.alive()) {
 		me.removeMe = true;
+
+		auto msSinceLast = std::chrono::duration_cast<std::chrono::milliseconds>(state.timeNow - lastSplat).count();
+		if (msSinceLast > 50) {
+			lastSplat = state.timeNow;
+			state.sound->play("splat");
+		}
+	}
 }

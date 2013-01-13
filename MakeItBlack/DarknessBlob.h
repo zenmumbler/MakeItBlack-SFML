@@ -11,6 +11,7 @@ EntityRef makeDarknessBlob(State & state, float startX, float startY, bool going
 class BlobDelegate : public EntityDelegate {
 	static std::uniform_real_distribution<float> spewWidthVariance;
 	static std::uniform_real_distribution<float> spewHeightVariance;
+	static TimePoint lastSplat;
 
 	bool lowBeam;
 	

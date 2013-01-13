@@ -2,6 +2,7 @@
 // (c) 2013 by Arthur Langereis
 
 #include "Pet.h"
+#include "Sound.h"
 
 namespace {
 	constexpr static float PET_SPEED_SEC = 15.f;
@@ -50,7 +51,11 @@ void PetDelegate::act(Entity & me, State & state, const sf::Input & input) {
 		me.velX = 0.f;
 	else {
 		me.velX = me.lookLeft ? -PET_SPEED_SEC : PET_SPEED_SEC;
-		if (me.isOnFloor() && state.random() > 0.98)
+		if (me.isOnFloor() && state.random() > 0.98f)
 			me.velY = -PET_JUMP_SPEED_SEC;
+	}
+	
+	if (state.random() > 0.991f && state.player->locX > 300.f) {
+		state.sound->play("pet");
 	}
 }

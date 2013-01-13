@@ -12,6 +12,7 @@
 
 
 class Map;
+class Sound;
 class Entity;
 class EntityDelegate;
 using EntityRef = std::shared_ptr<Entity>;
@@ -62,6 +63,8 @@ public:
 	std::string msgTitle, msgText;
 	
 	// --
+	
+	Sound * sound = nullptr;
 	
 	std::mt19937 randEngine;
 	std::uniform_real_distribution<float> normalDistribution { 0.0f, 1.0f };

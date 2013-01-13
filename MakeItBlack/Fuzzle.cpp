@@ -2,6 +2,7 @@
 // (c) 2013 by Arthur Langereis
 
 #include "Fuzzle.h"
+#include "Sound.h"
 
 namespace {
 	constexpr static float FUZZLE_SPEED_SEC = 20.f;
@@ -78,6 +79,7 @@ void FuzzleDelegate::collidedWithEntity(Entity & me, State & state, Entity & oth
 		me.takeDamage(other.attackPower());
 		if (! me.alive()) {
 			me.removeMe = true;
+			state.sound->play("fuzzledie");
 		}
 	}
 }

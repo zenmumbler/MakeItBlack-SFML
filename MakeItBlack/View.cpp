@@ -153,6 +153,8 @@ void View::drawSprites() {
 			int ealp = (ent->HP / 100.f) * 255.f;
 			sp.SetColor({ 255, 255, 255, ealp });
 		}
+		else
+			sp.SetColor(sf::Color::White);
 		
 		if (ent->type() == "player" && !ent->alive()) {
 			float scale = (1.f + (state->deathRatio * 4.f)) * VIEW_SCALE;

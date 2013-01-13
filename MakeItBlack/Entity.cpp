@@ -59,7 +59,7 @@ void Entity::move(float dt) {
 	// -- move and collide HORIZONTAL
 	if (tryX != locX) {
 		if (tryX < locX) {
-			testCol = std::floor(testX / TILE_DIM);
+			testCol = std::floor((float)testX / TILE_DIM);
 			tileA = backLayer.tileAt(locRow, testCol);
 			tileB = backLayer.tileAt(locRow - height + 1, testCol);
 			

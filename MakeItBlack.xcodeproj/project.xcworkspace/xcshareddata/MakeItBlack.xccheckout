@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6BE5ADC9-7CE3-44B7-86CF-7D0E6E0BE7A0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MakeItBlack</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9F29DB55-1C47-4AEB-85DE-E77434795D0F</key>
+		<string>ssh://github.com/zenmumbler/MakeItBlack-SFML.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MakeItBlack.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9F29DB55-1C47-4AEB-85DE-E77434795D0F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/zenmumbler/MakeItBlack-SFML.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9F29DB55-1C47-4AEB-85DE-E77434795D0F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F29DB55-1C47-4AEB-85DE-E77434795D0F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MakeItBlack</string>
+		</dict>
+	</array>
+</dict>
+</plist>
